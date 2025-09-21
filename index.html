@@ -43,28 +43,30 @@
     line-height: 1;
   }
   .paper {
-    position: absolute;
-    bottom: 48px; /* zarfın biraz üstünden başlasın */
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-    width: 140px;
-    height: 180px;
-    background: #fff8dc;
-    border: 3px solid #f39c12;
-    border-radius: 8px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 18px;
-    color: #333;
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    white-space: normal;
-    user-select: text;
-    line-height: 1.4;
-  }
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  min-width: 220px;      /* genişliği artırdım */
+  max-width: 280px;      /* çok büyümesin */
+  min-height: 120px;     /* başlangıç yüksekliği */
+  background: #fff8dc;
+  border: 3px solid #f39c12;
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  white-space: normal;
+  user-select: text;
+  line-height: 1.4;
+}
+
   .paper.show {
     transform: translateX(-50%) translateY(-180px);
     opacity: 1;
