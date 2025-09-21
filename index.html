@@ -3,83 +3,98 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kırmızı Kalpler ve Zarf</title>
+<title>Zarftan Kağıt Çıkan Animasyon</title>
 <style>
-  body {
-    margin: 0;
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    display: flex; justify-content: center; align-items: center;
     background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     font-family: Arial, sans-serif;
   }
-  .container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 30px,
-      #ff4d4d 30px,
-      #ff4d4d 32px
-    );
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 5px;
-    justify-content: center;
-    align-content: center;
+  .hearts-background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex; flex-wrap: wrap;
+    justify-content: center; align-content: center;
+    gap: 10px;
+    pointer-events: none; /* Kalpler tıklanmasın */
+    z-index: 0;
   }
   .heart {
+    font-size: 30px;
     color: red;
-    font-size: 24px;
     user-select: none;
   }
-  .envelope {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .envelope-wrapper {
+    position: relative;
+    width: 100px;
+    height: 130px;
     cursor: pointer;
-    font-size: 60px;
+    z-index: 10;
+  }
+  .envelope {
+    font-size: 90px;
     color: #cc0000;
+    user-select: none;
+    position: relative;
+    z-index: 2;
+  }
+  .paper {
+    position: absolute;
+    bottom: 30px; /* zarfın biraz üstünden başlasın */
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 80px;
+    height: 100px;
+    background: #fff8dc;
+    border: 2px solid #f39c12;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    white-space: normal;
+    user-select: text;
+  }
+  .paper.show {
+    transform: translateX(-50%) translateY(-130px);
+    opacity: 1;
+    pointer-events: auto;
   }
 </style>
 </head>
 <body>
-  <div class="container" aria-label="Kırmızı kalpler">
-    <!-- Kırmızı kalpler -->
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
 
-    <!-- Ortadaki zarf -->
-    <div class="envelope" title="Tıkla">✉️</div>
+<div class="hearts-background" aria-hidden="true">
+  <script>
+    for(let i=0; i<300; i++) {
+      document.write('<span class="heart">❤️</span>');
+    }
+  </script>
+</div>
+
+<div class="envelope-wrapper" aria-label="Zarf ve mesaj">
+  <div class="envelope" title="Zarfa tıkla">✉️</div>
+  <div class="paper" role="alert" aria-live="polite">
+    Bakma bana öyle kırgın kırgın<br>sende bana hastasın nenesi çılgın
   </div>
+</div>
 
 <script>
-  document.querySelector('.envelope').addEventListener('click', function() {
-    alert('Bakma bana öyle kırgın kırgın sende bana hastasın nenesi çılgın');
+  const envelopeWrapper = document.querySelector('.envelope-wrapper');
+  const paper = envelopeWrapper.querySelector('.paper');
+
+  envelopeWrapper.addEventListener('click', () => {
+    paper.classList.toggle('show');
   });
 </script>
+
 </body>
 </html>
+
