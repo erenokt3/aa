@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Zarftan Kağıt Çıkan Animasyon</title>
+<title>Büyük Zarf ve Kağıt Animasyonu</title>
 <style>
   body, html {
     margin: 0; padding: 0; height: 100%;
     display: flex; justify-content: center; align-items: center;
     background: #fff;
     font-family: Arial, sans-serif;
+    overflow: hidden;
   }
   .hearts-background {
     position: fixed;
@@ -17,53 +18,55 @@
     width: 100%; height: 100%;
     display: flex; flex-wrap: wrap;
     justify-content: center; align-content: center;
-    gap: 10px;
-    pointer-events: none; /* Kalpler tıklanmasın */
+    gap: 8px;
+    pointer-events: none;
     z-index: 0;
   }
   .heart {
-    font-size: 30px;
+    font-size: 36px;
     color: red;
     user-select: none;
   }
   .envelope-wrapper {
     position: relative;
-    width: 100px;
-    height: 130px;
+    width: 160px;
+    height: 220px;
     cursor: pointer;
     z-index: 10;
   }
   .envelope {
-    font-size: 90px;
+    font-size: 140px;
     color: #cc0000;
     user-select: none;
     position: relative;
     z-index: 2;
+    line-height: 1;
   }
   .paper {
     position: absolute;
-    bottom: 30px; /* zarfın biraz üstünden başlasın */
+    bottom: 48px; /* zarfın biraz üstünden başlasın */
     left: 50%;
     transform: translateX(-50%) translateY(100%);
-    width: 80px;
-    height: 100px;
+    width: 140px;
+    height: 180px;
     background: #fff8dc;
-    border: 2px solid #f39c12;
-    border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 10px;
+    border: 3px solid #f39c12;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    padding: 20px;
     box-sizing: border-box;
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
     color: #333;
     opacity: 0;
     pointer-events: none;
     transition: transform 0.5s ease, opacity 0.5s ease;
     white-space: normal;
     user-select: text;
+    line-height: 1.4;
   }
   .paper.show {
-    transform: translateX(-50%) translateY(-130px);
+    transform: translateX(-50%) translateY(-180px);
     opacity: 1;
     pointer-events: auto;
   }
@@ -73,13 +76,15 @@
 
 <div class="hearts-background" aria-hidden="true">
   <script>
-    for(let i=0; i<300; i++) {
+    // Sayfayı tamamen kaplayacak kadar kalp ekliyoruz
+    const heartCount = Math.floor((window.innerWidth / 44) * (window.innerHeight / 44));
+    for(let i=0; i<heartCount; i++) {
       document.write('<span class="heart">❤️</span>');
     }
   </script>
 </div>
 
-<div class="envelope-wrapper" aria-label="Zarf ve mesaj">
+<div class="envelope-wrapper" aria-label="Büyük zarf ve mesaj kağıdı">
   <div class="envelope" title="Zarfa tıkla">✉️</div>
   <div class="paper" role="alert" aria-live="polite">
     Bakma bana öyle kırgın kırgın<br>sende bana hastasın nenesi çılgın
